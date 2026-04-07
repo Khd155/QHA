@@ -1,9 +1,23 @@
-import React from 'react'
-import ReactDOM from 'react-dom/client'
-import App from './app'
+[build]
+  command = "npm run build"
+  publish = "dist"
+  functions = "netlify/functions"
 
-ReactDOM.createRoot(document.getElementById('root')).render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>
-)
+[dev]
+  command = "npm run build -- --watch"
+  port = 3000
+  targetPort = 5173
+  framework = "#custom"
+
+[[redirects]]
+  from = "/api/*"
+  to = "/.netlify/functions/:splat"
+  status = 200
+
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
+
+[functions]
+  node_bundler = "esbuild"

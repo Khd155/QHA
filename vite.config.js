@@ -1,25 +1,17 @@
-{
-  "name": "minutes-system",
-  "version": "1.0.0",
-  "private": true,
-  "description": "نظام المحاضر — قريش وأذان",
-  "scripts": {
-    "dev": "netlify dev",
-    "build": "vite build",
-    "preview": "vite preview",
-    "start": "netlify dev"
+import { defineConfig } from 'vite'
+import react from '@vitejs/plugin-react'
+
+export default defineConfig({
+  plugins: [react()],
+  build: {
+    outDir: 'dist',
+    rollupOptions: {
+      output: {
+        manualChunks: undefined,
+      }
+    }
   },
-  "dependencies": {
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0",
-    "@netlify/blobs": "^7.3.0"
-  },
-  "devDependencies": {
-    "@vitejs/plugin-react": "^4.2.0",
-    "vite": "^5.2.0",
-    "netlify-cli": "^17.0.0"
-  },
-  "engines": {
-    "node": ">=18.0.0"
+  server: {
+    port: 5173,
   }
-}
+})
